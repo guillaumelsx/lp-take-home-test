@@ -1,3 +1,6 @@
+const MAX_BENEFIT = 50;
+const MIN_BENEFIT = 0;
+
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
@@ -20,13 +23,9 @@ export class Pharmacy {
       switch (drug.name) {
         case "Herbal Tea":
           if (drug.expiresIn < 0) {
-            if (drug.benefit < 50) {
-              drug.benefit += 2;
-            }
+            drug.benefit = Math.min(MAX_BENEFIT, drug.benefit + 2);
           } else {
-            if (drug.benefit < 50) {
-              drug.benefit += 1;
-            }
+            drug.benefit = Math.min(MAX_BENEFIT, drug.benefit + 1);
           }
           break;
 
@@ -34,29 +33,19 @@ export class Pharmacy {
           if (drug.expiresIn < 0) {
             drug.benefit = 0;
           } else if (drug.expiresIn < 5) {
-            if (drug.benefit < 50) {
-              drug.benefit += 3;
-            }
+            drug.benefit = Math.min(MAX_BENEFIT, drug.benefit + 3);
           } else if (drug.expiresIn < 10) {
-            if (drug.benefit < 50) {
-              drug.benefit += 2;
-            }
+            drug.benefit = Math.min(MAX_BENEFIT, drug.benefit + 2);
           } else {
-            if (drug.benefit < 50) {
-              drug.benefit += 1;
-            }
+            drug.benefit = Math.min(MAX_BENEFIT, drug.benefit + 1);
           }
           break;
 
         default:
           if (drug.expiresIn < 0) {
-            if (drug.benefit > 0) {
-              drug.benefit -= 2;
-            }
+            drug.benefit = Math.max(MIN_BENEFIT, drug.benefit - 2);
           } else {
-            if (drug.benefit > 0) {
-              drug.benefit -= 1;
-            }
+            drug.benefit = Math.max(MIN_BENEFIT, drug.benefit - 1);
           }
           break;
       }
