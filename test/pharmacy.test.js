@@ -98,4 +98,26 @@ describe("Pharmacy", () => {
       expect(pharmacy.drugs[0].benefit).toBe(20);
     });
   });
+
+  describe("Dafalgan", () => {
+    it("should decrease the benefit of Dafalgan by 2 before expiration", () => {
+      const drugs = [new Drug("Dafalgan", 10, 20)];
+      const pharmacy = new Pharmacy(drugs);
+
+      pharmacy.updateBenefitValue();
+
+      expect(pharmacy.drugs[0].expiresIn).toBe(9);
+      expect(pharmacy.drugs[0].benefit).toBe(18);
+    });
+
+    it("should decrease the benefit of Dafalgan by 4 after expiration", () => {
+      const drugs = [new Drug("Dafalgan", 0, 20)];
+      const pharmacy = new Pharmacy(drugs);
+
+      pharmacy.updateBenefitValue();
+
+      expect(pharmacy.drugs[0].expiresIn).toBe(-1);
+      expect(pharmacy.drugs[0].benefit).toBe(16);
+    });
+  });
 });

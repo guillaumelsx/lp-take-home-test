@@ -29,6 +29,7 @@ export class Pharmacy {
     const updateStrategies = {
       "Herbal Tea": this.updateHerbalTea,
       Fervex: this.updateFervex,
+      Dafalgan: this.updateDafalgan,
       default: this.updateDefaultDrug,
     };
 
@@ -54,6 +55,13 @@ export class Pharmacy {
     } else {
       drug.benefit = Math.min(MAX_BENEFIT, drug.benefit + 1);
     }
+  }
+
+  updateDafalgan(drug) {
+    drug.benefit =
+      drug.expiresIn < 0
+        ? Math.max(MIN_BENEFIT, drug.benefit - 4)
+        : Math.max(MIN_BENEFIT, drug.benefit - 2);
   }
 
   updateDefaultDrug(drug) {
