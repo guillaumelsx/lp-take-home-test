@@ -1,4 +1,5 @@
-import { Drug, Pharmacy } from "./pharmacy";
+import { Drug } from "./src/drug";
+import { Pharmacy } from "./src/pharmacy";
 
 import fs from "fs";
 
@@ -14,8 +15,8 @@ const pharmacy = new Pharmacy(drugs);
 const log = [];
 
 for (let elapsedDays = 0; elapsedDays < 30; elapsedDays++) {
-  const updatedBenefits = structuredClone(pharmacy.updateBenefitValue());
-  log.push(updatedBenefits);
+  const updatedBenefits = pharmacy.updateBenefitValue();
+  log.push(structuredClone(updatedBenefits));
 }
 
 /* eslint-disable no-console */
