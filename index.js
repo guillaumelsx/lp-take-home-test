@@ -1,4 +1,5 @@
-import { Drug, Pharmacy } from "./pharmacy";
+import { Drug } from "./src/drug";
+import { Pharmacy } from "./src/pharmacy";
 
 import fs from "fs";
 
@@ -7,13 +8,15 @@ const drugs = [
   new Drug("Herbal Tea", 10, 5),
   new Drug("Fervex", 12, 35),
   new Drug("Magic Pill", 15, 40),
+  new Drug("Dafalgan", 10, 20),
 ];
 const pharmacy = new Pharmacy(drugs);
 
 const log = [];
 
 for (let elapsedDays = 0; elapsedDays < 30; elapsedDays++) {
-  log.push(JSON.parse(JSON.stringify(pharmacy.updateBenefitValue())));
+  const updatedBenefits = pharmacy.updateBenefitValue();
+  log.push(structuredClone(updatedBenefits));
 }
 
 /* eslint-disable no-console */
